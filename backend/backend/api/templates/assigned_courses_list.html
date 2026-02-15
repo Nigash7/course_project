@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assigned Courses</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5 px-5">
+    
+
+    <h2 class="text-center mb-4">Student Courses</h2>
+    <h4 class="text-center mb-3">
+    Assign Course to {{ student.user.username }}
+</h4>
+
+<!-- 🔎 Course Search -->
+<form method="GET" class="mb-3 d-flex justify-content-center col-md-6 mx-auto">
+    <div class="input-group">
+        <input type="text"
+               name="q"
+               class="form-control"
+               placeholder="Search course..."
+               value="{{ request.GET.q }}">
+
+        <button class="btn btn-primary" type="submit">
+            Search
+        </button>
+         <a href="{% url 'assigned_courses_list' %}" class="btn btn-secondary">
+            Reset
+        </a>
+    </div>
+</form>
+
+    {% for student in students %}
+    
+    <div class="card mb-4 shadow-lg w-100">
+
+        <!-- Header -->
+        <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white p-3">
+            <h4 class="mb-0">{{ student.user.username }} ({{ student.user.email }})</h4>
+
+            <a href="{% url 'allocate_course' student.id %}" class="btn btn-light btn-sm">
+                + Add Course
+            </a>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body">
+
+            {% for enrollment in student.enrollment_set.all %}
+            <div class="d-flex justify-content-between align-items-center border p-3 mb-3 rounded bg-white">
+
+                <span class="fw-semibold">{{ enrollment.course.title }}</span>
+
+                <a href="{% url 'delete_enrollment' enrollment.id %}"
+   class="btn btn-danger btn-sm"
+   onclick="return confirm('Delete this course?')">
+   Delete
+</a>
+
+            </div>
+
+            {% empty %}
+                <p class="text-muted">No courses assigned</p>
+            {% endfor %}
+
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>
