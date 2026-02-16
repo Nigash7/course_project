@@ -32,13 +32,22 @@
                             {{ form.description }}
                         </div>
 
-                        <div class="mb-4">
+                        <div class="mb-1">
                             <label class="form-label fw-semibold">YouTube Video URL</label>
                             {{ form.video_url }}
                             <small class="text-muted">
-                                Example: https://www.youtube.com/watch?v=xxxx
+                                Example:https://youtu.be/OD-WuJ9GR7s
                             </small>
                         </div>
+                        <p><span style='font-size:20px;'>&#9757;</span>single video (or)<span style='font-size:20px;'>&#128071;</span> playlist</p>
+                        <div class="mb-1">
+    <label class="form-label fw-semibold">YouTube Playlist URL</label>
+    {{ form.playlist_url }}
+    <small class="text-muted">
+        Example: https://www.youtube.com/playlist?list=PLxxxx
+    </small>
+</div>
+                        
 
                         <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">
                             Add Course

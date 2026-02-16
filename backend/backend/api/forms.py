@@ -20,7 +20,7 @@ class StudentRegisterForm(forms.ModelForm):
 class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
-        fields = ['title', 'description', 'video_url']
+        fields = ['title', 'description', 'video_url', 'playlist_url']
 
         widgets = {
             'title': forms.TextInput(attrs={
@@ -35,6 +35,10 @@ class CourseForm(forms.ModelForm):
             'video_url': forms.URLInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Paste YouTube video link (optional)'
+            }),
+             'playlist_url': forms.URLInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Paste YouTube playlist link (optional)'
             }),
         }
 
