@@ -24,9 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ekdg6+mf11vbpv=m14k6xzc-)s%-&_s#^#3t!%#4qf+0w01l0)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -91,7 +93,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 #     }
 # }
 DATABASES = {
-    'default': dj_database_url.parse('PASTE_DATABASE_URL')
+    'default': dj_database_url.parse('postgresql://course_db_npd1_user:gUBh7YogCMbAFmrNfLczNmXdFsUtzzeU@dpg-d68lgin5r7bs73ern1tg-a.singapore-postgres.render.com/course_db_npd1')
 }
 
 # Password validation
