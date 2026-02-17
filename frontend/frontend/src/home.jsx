@@ -14,21 +14,23 @@ function Home() {
     return;
   }
 
-  axios
-    .get("https://course-project-66az.onrender.com/api/my-courses/", {
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    })
-    .then((response) => {
-      setCourses(response.data);
-    })
-    .catch((error) => {
-      console.error(error);
-      localStorage.removeItem("token");
-      navigate("/");
-    });
-}, []);
+  axios.get("https://course-project-66az.onrender.com/api/my-courses/", {
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  })
+  .then((response) => {
+    setCourses(response.data);
+  })
+  .catch((error) => {
+    console.error(error);
+
+    // if token invalid → logout
+    localStorage.removeItem("token");
+    navigate("/");
+  });
+
+}, [navigate]);
   return (
     <div>
       {/* Navbar */}
