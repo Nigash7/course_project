@@ -16,7 +16,7 @@ function Home() {
     }
 
     // ✅ Fetch enrolled courses
-    axios.get("http://127.0.0.1:8000/api/my-courses/",{
+    axios.get("https://course-project-66az.onrender.com/api/my-courses/",{
         headers: {
           Authorization: `Token ${token}`,
         },

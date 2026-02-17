@@ -11,7 +11,7 @@ function Logout() {
         const token = localStorage.getItem("token");
 
         await axios.post(
-          "http://127.0.0.1:8000/api/logout/",
+          "https://course-project-66az.onrender.com/api/logout/",
           {},
           {
             headers: {
