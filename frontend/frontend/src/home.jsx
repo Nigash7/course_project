@@ -6,39 +6,29 @@ function Home() {
   const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
+ useEffect(() => {
+  const token = localStorage.getItem("token");
 
-    // 🔐 If no token → go to login
-    if (!token) {
-      navigate("/");
-      return;
-    }
-
-    // ✅ Fetch enrolled courses
-    axios.get("https://course-project-66az.onrender.com/api/my-courses/",{
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      })
-      .then((response) => {
-        setCourses(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-        navigate("/home");
-      });
-  }, [navigate]);
-
- const handleVideo = (course) => {
-  navigate(`/course/${course.id}`, { state: { course } });
-};
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
+  if (!token) {
     navigate("/");
-  };
+    return;
+  }
 
+  axios
+    .get("https://course-project-66az.onrender.com/api/my-courses/", {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((response) => {
+      setCourses(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+      localStorage.removeItem("token");
+      navigate("/");
+    });
+}, []);
   return (
     <div>
       {/* Navbar */}
