@@ -6,32 +6,28 @@ function Home() {
   const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
 
- useEffect(() => {
-  const token = localStorage.getItem("token");
+const [isLoading, setIsLoading] = useState(true);
 
+useEffect(() => {
+  const token = localStorage.getItem("token");
   if (!token) {
     navigate("/");
     return;
   }
 
-  axios.get("https://course-project-66az.onrender.com/api/my-courses/", {
-    headers: {
-      Authorization: `Token ${token}`,
-    },
-  })
-  .then((response) => {
-    setCourses(response.data);
-  })
-  .catch((error) => {
-    console.error(error);
-
-    // if token invalid → logout
-    localStorage.removeItem("token");
-    navigate("/");
-  });
-
+  axios.get("https://course-project-66az.onrender.com/api/my-courses/", { headers: { Authorization: `Token ${token}` } })
+    .then(res => {
+      setCourses(res.data);
+      setIsLoading(false); // Only stop loading after success
+    })
+    .catch(() => {
+      localStorage.removeItem("token");
+      navigate("/");
+    });
 }, [navigate]);
-  return (
+
+if (isLoading) return <div>Loading...</div>; // No more flicker
+return (
     <div>
       {/* Navbar */}
       <nav className="navbar navbar-dark bg-primary">
